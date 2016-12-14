@@ -1,6 +1,6 @@
 # Oscam E0 Readers & Cacheex patch
 
-This patch improve oscam compatiblity with the new E0.
+This patch improve oscam compatibility with the new E0.
 
 Author: [Messi89](https://github.com/messi89)
 
