@@ -1,0 +1,30 @@
+Index: module-cacheex.c
+===================================================================
+--- module-cacheex.c	(révision 11283)
++++ module-cacheex.c	(copie de travail)
+@@ -664,6 +664,10 @@
+ 		null |= (er->cw[i] | er->cw[i + 1] | er->cw[i + 2]);
+ 		if(er->cw[i + 3] != c)
+ 		{
++			if(er->prid == 0x030B00 || er->prid == 0x032830) {
++				cs_log_dbg(D_TRACE, "notice: CW checksum check disabled for %s by messi89", er->prid);
++				break;
++			}
+ 			cs_log_dump_dbg(D_CACHEEX, er->cw, 16, "push received cw with chksum error from %s", csp ? "csp" : username(cl));
+ 			cl->cwcacheexerr++;
+ 			if(cl->account)
+Index: oscam-ecm.c
+===================================================================
+--- oscam-ecm.c	(révision 11283)
++++ oscam-ecm.c	(copie de travail)
+@@ -1585,6 +1585,10 @@
+ 				c = ((cw[i] + cw[i + 1] + cw[i + 2]) & 0xff);
+ 				if(cw[i + 3] != c)
+ 				{
++					if(er->prid == 0x030B00 || er->prid == 0x032830) {
++						cs_log_dbg(D_TRACE, "notice: CW checksum check disabled for %s by messi89", er->prid);
++						break;
++					}
+ 					unsigned char nano = 0x00;
+ 					if(er->caid == 0x100 && er->ecm[5] > 0x00)
+ 					{
